@@ -1,0 +1,13 @@
+stock_id,cross_id,genotype,generation,female_parent,male_parent,species,date_collected,location,contributor_id,antibiotics_resistance,oligo_1,oligo_2,notes
+0,00000,00000,00000,00000,00000,00000,,,,,,,
+123,123,test,test,test,test,test,2011-01-19,test,test,test,test,test,test
+1223,hello,hello,hello,hello,hello,hello,,,,,,,
+1234,ASDF,fsdf,adfda,asdf,adf,adsf,,,,,,,
+11111,TEST,PLEASE,WORK,AGAIN,PLEASEEEE,Thanks,,,,,,,
+12345,asd,col,f2,,,at,,,,kan,,,
+64301,09234,normal-mutant,Y17,61023,82932,Tiger Lily,,"Stafford, Virginia",Ron Swanson,Gillespie ,,,Needs to be kept in shade. Water every three days
+123433,ASBV,asd,TEST,TEST,TEST,TEST,,,,,,,
+1239990,ASDF,fsdf,adfda,asdf,adf,adsf,,TEST,TEST,TEST,TEST,TEST,TESTETSTTET
+6456213,6326,normal-normal,X23,65243,12382,Alkali weed,,Catalina Island,Dr. Baushe,None,,,
+10282015,Test2,test2,test2,test2,test2,test2,,,,,,,
+2147483647,ASDF,fsdf,adfda,asdf,adf,adsf,,,,,,,

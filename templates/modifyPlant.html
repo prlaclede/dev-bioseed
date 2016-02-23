@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{%block menu %}
+    {% if session['role'] == 0 %}
+    <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
+            <a href="/search">Search</a></li>
+          
+          <!--<li  {% if selectedMenu == "modifySeed" %} class="selected" {% endif %}  >-->
+          <!--  <a href="/modifySeed">Modify Seed Stock</a></li>-->
+            
+          <li  {% if selectedMenu == "add" %} class="selected" {% endif %}  >
+            <a href="/add">Add Seed Stock</a></li>
+          
+          
+          <li  {% if selectedMenu == "Users" %} class="selected" {% endif %}  >
+            <a href="/users">Users</a></li>
+            
+            <li  {% if selectedMenu == "Setting" %} class="selected" {% endif %}  >
+            <a href="/userSetting" >{{ session['username'] }} - Settings</a></li>
+          
+          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
+            <a href="/logout">Logout</a></li>
+    {%elif session['role'] == 1%}
+        <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
+            <a href="/search">Search</a></li>
+          
+          <!--<li  {% if selectedMenu == "modifySeed" %} class="selected" {% endif %}  >-->
+          <!--  <a href="/modifySeed">Modify Seed Stock</a></li>-->
+            
+          <li  {% if selectedMenu == "add" %} class="selected" {% endif %}  >
+            <a href="/add">Add Seed Stock</a></li>
+            
+            <li  {% if selectedMenu == "Setting" %} class="selected" {% endif %}  >
+            <a href="/userSetting" >{{ session['username'] }} - Settings</a></li>
+          
+          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
+            <a href="/logout">Logout</a></li>
+    {%else %}
+    <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
+            <a href="/search">Search</a></li>
+          
+          <li  {% if selectedMenu == "Setting" %} class="selected" {% endif %}  >
+            <a href="/userSetting" >{{ session['username'] }} - Settings</a></li>
+          
+          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
+            <a href="/logout" >Logout</a></li>
+    {%endif%}
+    {%endblock%}
+
+{% block content %}
+
+
+
+<h1>Modify Plant</h1>
+<form method="POST" action="/updatePlant">
+
+
+<table>
+<!--  <td>STOCK ID</td>-->
+<!--</table>-->
+<table>
+	<tr>
+		<td>Stock ID:</td>
+		<td>
+
+			<input type="text" id="stock_id" name="stock_id" value = "{{stockid[0]}}"/>
+		</td>
+	</tr>
+	<tr>
+		<td>Cross ID:</td>
+		<td>
+			<input type = "text" id = "cross_id" name = "cross_id" value = "{{stockid[1]}}"/>
+		</td>
+	</tr>
+  <tr>
+    <td>Genotype:</td>
+    <td><input type="text" id="genotype" name="genotype" value = "{{stockid[2]}}"/></td>
+  </tr>
+    
+	<tr>
+	  <td>Generation:</td>
+	  <td><input type="text" id="generation" name="generation" value = "{{stockid[3]}}"/></td>
+  </tr>
+  
+	<tr>
+	  <td>Female Parent:</td>
+	  <td><input type="text" id="femaleParent" name="femaleParent" value = "{{stockid[4]}}"/></td>
+  </tr>
+  
+	<tr>
+	  <td>Male Parent:</td>
+	  <td><input type="text" id="maleParent" name="maleParent" value = "{{stockid[5]}}"/></td>
+  </tr>
+  
+	<tr><td>Species:</td><td><input type="text" id="species" name="species" value = "{{stockid[6]}}"/></td></tr>
+	<!--<tr><td>Month:</td><td><input type="text" id="month" name="month" /></td></tr>-->
+	<!--<tr><td>Date Collected:</td><td><input type="number" name="month" min="1" max="12" step="1" value="1" size="3"/> -->
+	<!--<input type="number" name="day" min="1" max="31" step="1" value="1" size="3"/>-->
+	<!--<input type="number" name="year" min="2009" max="2014" step="1" value="2011" size="4"/></td></tr>-->
+	<tr><td>Location:</td><td><input type="text" id="location" name="location" value = "{{stockid[8]}}"/></td></tr>
+	<tr><td>Contributor:</td><td><input type="text" id="contributor" name="contributor"value = "{{stockid[9]}}" /></td></tr>
+	<tr><td>Antibotic Resistance:</td><td><input type="text" id="antibioticResistance" name="antibioticResistance" value = "{{stockid[10]}}"/></td></tr>
+	<tr><td>Sequencing Oligo 1:</td><td><input type="text" id="oligo1" name="oligo1" value = "{{stockid[11]}}"/></td></tr>
+	<tr><td>Sequencing Oligo 2:</td><td><input type="text" id="oligo2" name="oligo2" value = "{{stockid[12]}}"/></td></tr>
+	<tr><td>Notes:</td><td><input type="text" id="notes" name="notes" value = "{{stockid[13]}}"/></td></tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>
+			<input type="submit" value="Modify Plant" />
+		</td>
+	</tr>
+</table>
+
+</form>
+
+{% endblock %}

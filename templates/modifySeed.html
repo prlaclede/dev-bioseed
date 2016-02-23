@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{%block menu %}
+    {% if session['role'] == 0 %}
+    <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
+            <a href="/search">Search</a></li>
+          
+          <!--<li  {% if selectedMenu == "modifyPlant" %} class="selected" {% endif %}  >-->
+          <!--  <a href="/modifyPlant">Modify Seed Stock</a></li>-->
+            
+          <li  {% if selectedMenu == "add" %} class="selected" {% endif %}  >
+            <a href="/add">Add Seed Stock</a></li>
+          
+          
+          <li  {% if selectedMenu == "Users" %} class="selected" {% endif %}  >
+            <a href="/users">Users</a></li>
+          
+          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
+            <a href="/">{{ session['username'] }} - Logout</a></li>
+    {%elif session['role'] == 1%}
+        <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
+            <a href="/search">Search</a></li>
+          
+          <!--<li  {% if selectedMenu == "modifySeed" %} class="selected" {% endif %}  >-->
+          <!--  <a href="/modifySeed">Modify Seed Stock</a></li>-->
+            
+          <li  {% if selectedMenu == "add" %} class="selected" {% endif %}  >
+            <a href="/add">Add Seed Stock</a></li>
+          
+          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
+            <a href="/">{{ session['username'] }} - Logout</a></li>
+    {%else %}
+    <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
+            <a href="/search">Search</a></li>
+          
+          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
+            <a href="/" >{{ session['username'] }} - Logout</a></li>
+    {%endif%}
+    {%endblock%}
+
+{% block content %}
+<form method="POST" action="/searchDBModify">
+<p>
+            <input class="search" type="text" name="search_field" value="Enter keywords...." onfocus = "if (this.value == 'Enter keywords....') this.value ='';" />
+            <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="{{ url_for('static', filename='img/search.png') }}" alt="Search" title="Search" />
+          </p>
+          </form>
+          <div style="overflow-x: scroll;width:100%;">
+              <table  id="results" border="1"  style="background-color:#FFFFCC" width="0%" cellpadding="3" cellspacing="3">
+                 <tr><b><td><b>StockID</b></td>
+                        <td><b>CrossID</b></td>
+                        <td><b>Genotype</b></td>
+                        <td><b>Generation</b></td>
+                        <td><b>FemaleParent</b></td>
+                        <td><b>MaleParent</b></td>
+                        <td><b>Species</b></td>
+                        <td><b>DateCollected</b></td>
+                        <td><b>Location</b></td>
+                        <td><b>contributor_id</b></td>
+                        <td><b>antibioticResistance</b></td>
+                        <td><b>oligo_1</b></td>
+                        <td><b>oligo_2</b></td>
+                        <td><b>notes</b></td>
+                </tr>
+        	        {% for seedstocks in seedstock %}
+            	
+        	     <tr><td><a href="/modifyPlant?stockid={{ seedstocks[0] }}">{{ seedstocks[0] }}</a></td>
+        	         <td>{{ seedstocks[1] }}</td>
+        	         <td>{{ seedstocks[2] }} </td>
+        	         <td>{{ seedstocks[3] }}</td>
+        	         <td>{{ seedstocks[4] }} </td>
+        	         <td>{{ seedstocks[5] }}</td>
+        	         <td>{{ seedstocks[6] }}</td>
+        	         <td>{{ seedstocks[7] }}</td>
+        	         <td>{{ seedstocks[8] }}</td>
+        	         <td>{{ seedstocks[9] }}</td>
+        	         <td>{{ seedstocks[10] }}</td>
+        	         <td>{{ seedstocks[11] }}</td>
+        	         <td>{{ seedstocks[12] }}</td>
+        	         <td>{{ seedstocks[13] }}</td>
+        	     </tr>
+        	
+                  {% endfor %}
+	          </table>	
+	          
+	          <!--<form>-->
+           <!-- Please specify a csv file to import:<br>-->
+           <!--   <input type="file" name="datafile" size="40">-->
+           <!--   </p>-->
+           <!--     <div>-->
+           <!--       <input type="submit" value="Submit" />-->
+           <!--         <a href=/importCSV>Import CSV</a>-->
+           <!--     </div>-->
+           <!-- </form>-->
+	          
+	          
+	       <a href=/importCSV>Import CSV</a>
+
+{% endblock %}

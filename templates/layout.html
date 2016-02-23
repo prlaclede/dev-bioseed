@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Biological Seed Database</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <!-- class="logo_colour", allows you to change the colour of the text -->
+        <h1><a href="/search"><span class="logo_colour"> Biological Seed Database </span></a></h1>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          {% block menu %}
+          <!--<li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >-->
+          <!--  <a href="/search">Search</a></li>-->
+          
+          <!--<li  {% if selectedMenu == "modifyPlant" %} class="selected" {% endif %}  >-->
+          <!--  <a href="/modifyPlant">Modify Seed Stock</a></li>-->
+            
+          <!--<li  {% if selectedMenu == "add" %} class="selected" {% endif %}  >-->
+          <!--  <a href="/add">Add Seed Stock</a></li>-->
+          
+          
+          <!--<li  {% if selectedMenu == "Users" %} class="selected" {% endif %}  >-->
+          <!--  <a href="/users">Users</a></li>-->
+          
+          <!--<li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >-->
+          <!--  <a href="/">Logout</a></li>-->
+          {% endblock %}
+        </ul>
+      </div>
+    </div>
+
+    <div id="site_content">
+      <div class="sidebar">
+        {% block sidebar %}
+        
+        {% endblock %}
+      </div>
+      <div id="content">
+         {%block content %}
+         
+          {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

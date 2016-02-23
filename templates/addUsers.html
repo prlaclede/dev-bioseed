@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{%block menu %}
+    {% if session['role'] == 0 %}
+    <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
+            <a href="/search">Search</a></li>
+          
+          <!--<li  {% if selectedMenu == "modifySeed" %} class="selected" {% endif %}  >-->
+          <!--  <a href="/modifySeed">Modify Seed Stock</a></li>-->
+            
+          <li  {% if selectedMenu == "add" %} class="selected" {% endif %}  >
+            <a href="/add">Add Seed Stock</a></li>
+          
+          
+          <li  {% if selectedMenu == "Users" %} class="selected" {% endif %}  >
+            <a href="/users">Users</a></li>
+            
+            <li  {% if selectedMenu == "Setting" %} class="selected" {% endif %}  >
+            <a href="/userSetting" >{{ session['username'] }} - Settings</a></li>
+          
+          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
+            <a href="/logout">Logout</a></li>
+    {%elif session['role'] == 1%}
+        <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
+            <a href="/search">Search</a></li>
+          
+          <!--<li  {% if selectedMenu == "modifySeed" %} class="selected" {% endif %}  >-->
+          <!--  <a href="/modifySeed">Modify Seed Stock</a></li>-->
+            
+          <li  {% if selectedMenu == "add" %} class="selected" {% endif %}  >
+            <a href="/add">Add Seed Stock</a></li>
+            
+            <li  {% if selectedMenu == "Setting" %} class="selected" {% endif %}  >
+            <a href="/userSetting" >{{ session['username'] }} - Settings</a></li>
+          
+          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
+            <a href="/logout">Logout</a></li>
+    {%else %}
+    <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
+            <a href="/search">Search</a></li>
+          
+          <li  {% if selectedMenu == "Setting" %} class="selected" {% endif %}  >
+            <a href="/userSetting" >{{ session['username'] }} - Settings</a></li>
+          
+          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
+            <a href="/logout" >Logout</a></li>
+    {%endif%}
+    {%endblock%}
+
+{% block content %}
+<h1>Add User To Database</h1>
+<form method = "POST" action = "/addUserToDB">
+					<table>
+					<tr><td>Username:</td><td><input type="text" id="username" name="username" required/></td></tr>
+					<tr><td>Email:</td><td><input type="text" id="email" name="email" required/></td></tr>
+					<tr><td>Password:</td><td><input type="text" id="password" name="password" /></td></tr>
+					<tr><td>Account Level:<td><select name = "accountLevel" id="accountLevel" >
+					    <option value = "Basic">Basic</option>
+					    <option value = "Priviledged">Priviledged</option>
+					    <option vaule = "Admin">Admin</option>
+					</select></td></tr>
+					<tr><td>Active User: <td>
+						<input type="radio" name="active" value="active" checked> Active
+  						<br>
+  						<input type="radio" name="active" value="notActive"> Not Active
+					</td></td></tr>
+					
+					
+					<tr><td>&nbsp;</td><td><input type="submit" value="Add" /></td></tr>
+					</table>
+					
+					
+</form>
+
+{% endblock%}
