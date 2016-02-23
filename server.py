@@ -341,11 +341,6 @@ def Users():
 def addUsers():
   return render_template('addUsers.html', selectedMenu='addUsers')
     
-    
-@app.route('/test')
-def test():
-  return render_template('test.html', selectedMenu='test')
-    
 @app.route('/modifySeed')
 def modifySeed():
   return render_template('modifySeed.html', selectedMenu='modifySeed')

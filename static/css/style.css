@@ -168,7 +168,7 @@ ul#menu li a:hover
   overflow: hidden;
   margin: 0 auto 0 auto;
   padding: 10px 20px 20px 20px;
-  background: #F6F6F0 url(back.png) repeat-y;
+  background: #F6F6F0 url(../img/back.png) repeat-y;
   border: 15px solid #FFF;} 
 
 .sidebar
