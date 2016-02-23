@@ -1,27 +1,7 @@
-#from docx import Document
-import MySQLdb
-#import psycopg2
-#import psycopg2.extras
-import os
-import datetime
-import csv
-import StringIO
-import flask
-import smtplib
-import string
-import random
-
-
-#import flask.ext.excel
-#from flask.ext.sqlalchemy import SQLAlchemy # sql operations
-
-
-# from datetime import datetime
-# now = datetime.date(1990,03)
-
+import os, datetime, csv, StringIO, flask, smtplib, string, random, MySQLdb
 from flask import Flask, render_template, request, session
-app = Flask(__name__)
 
+app = Flask(__name__)
 
 app.secret_key = os.urandom(24).encode('hex')
 
