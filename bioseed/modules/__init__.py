@@ -1,1 +1,1 @@
-#from bioseed.modules.database.database import Database
+from bioseed.modules.database.database import connectToDB

@@ -7,6 +7,16 @@ admin_api = Blueprint('admin_api', __name__)
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
+#This function is used to see of the string contains special chatacters
+def stringContains(inputString):
+  import re
+  if (re.match('^[a-zA-Z0-9-_]*$',inputString)):
+    #return true if the string only contains the Above characters
+    return True 
+  else:
+    #return false if the string contains special characters
+    return False
+
 @admin_api.route('/modify')
 def modify():
     return render_template('modifyUser.html')    
