@@ -65,7 +65,8 @@
 			</tr>
 			{% if userId[3] == 0 %}
 			<tr>
-				<td>Account Level: 	
+				<td>Account Level:</td>
+				<td>
 					<select name="accountLevel" id="accountLevel">
 					{% if userId[3] == 2 %}
 						<option value="Basic" selected>Basic</option>
@@ -85,16 +86,17 @@
 			</tr>
 			{% endif %}
 			<tr>
-				<td>Active User:
-				{% if userId[2] == 1 %}
+				<td>Active User:</td>
+				<td>
+					{% if userId[2] == 1 %}
 					<input type="radio" name="active" value="active" checked> Active
 					<br>
 					<input type="radio" name="active" value="notActive"> Not Active
-				{% else %} 
+					{% else %} 
 					<input type="radio" name="active" value="active" > Active
 					<br>
 					<input type="radio" name="active" value="notActive" checked> Not Active 
-				{%endif%}
+					{%endif%}
 				</td>
 			</tr>
 			<tr>

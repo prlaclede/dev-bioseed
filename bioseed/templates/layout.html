@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
   <head>
     <title>Biological Seed Database</title>
     <meta name="description" content="website description" />
@@ -9,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon" />
   </head>
-
+  
   <body>
     <div id="main">
       <div id="header">
@@ -31,7 +30,7 @@
           {% endblock %}
         </div>
         <div id="content">
-          {%block content %}
+          {% block content %}
           {% endblock %}
         </div>
       </div>
