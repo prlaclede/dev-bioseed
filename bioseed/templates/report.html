@@ -1,207 +1,238 @@
 {% extends "layout.html"%}
-<script type="text/javascript" src="jquery-1.3.2.js" ></script>
-<script type="text/javascript" src="html2CSV.js" ></script>
-
-
-{%block menu %}
+    <script type="text/javascript" src="jquery-1.3.2.js" ></script>
+    <script type="text/javascript" src="html2CSV.js" ></script>
+{% block menu %}
     {% if session['role'] == 0 %}
-    <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
-            <a href="/search">Search</a></li>
-          
-          <!--<li  {% if selectedMenu == "modifySeed" %} class="selected" {% endif %}  >-->
-          <!--  <a href="/modifySeed">Modify Seed Stock</a></li>-->
-            
-          <li  {% if selectedMenu == "add" %} class="selected" {% endif %}  >
-            <a href="/add">Add Seed Stock</a></li>
-          
-          
-          <li  {% if selectedMenu == "Users" %} class="selected" {% endif %}  >
-            <a href="/users">Users</a></li>
-            
-            <li  {% if selectedMenu == "Setting" %} class="selected" {% endif %}  >
-            <a href="/userSetting" >{{ session['username'] }} - Settings</a></li>
-          
-          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
-            <a href="/logout">Logout</a></li>
-    {%elif session['role'] == 1%}
-        <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
-            <a href="/search">Search</a></li>
-          
-          <!--<li  {% if selectedMenu == "modifySeed" %} class="selected" {% endif %}  >-->
-          <!--  <a href="/modifySeed">Modify Seed Stock</a></li>-->
-            
-          <li  {% if selectedMenu == "add" %} class="selected" {% endif %}  >
-            <a href="/add">Add Seed Stock</a></li>
-            
-            <li  {% if selectedMenu == "Setting" %} class="selected" {% endif %}  >
-            <a href="/userSetting" >{{ session['username'] }} - Settings</a></li>
-          
-          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
-            <a href="/logout">Logout</a></li>
-    {%else %}
-    <li  {% if selectedMenu == "Search" %} class="selected" {% endif %}  >
-            <a href="/search">Search</a></li>
-          
-          <li  {% if selectedMenu == "Setting" %} class="selected" {% endif %}  >
-            <a href="/userSetting" >{{ session['username'] }} - Settings</a></li>
-          
-          <li  {% if selectedMenu == "Home" %} class="selected" {% endif %}  >
-            <a href="/logout" >Logout</a></li>
-    {%endif%}
-    {%endblock%}
-
-{% block sidebar %}
-<h1>Label Info</h1>
-S.No {{stockid[0]}} Cross ID: {{stockid[1]}} <br>
-Generation: {{stockid[3]}} Sibling: <br>
-Date: {{stockid[7]}} <br>
-Comments: {{stockid[13]}} <br>
-<br><br>
-<a href="{{ url_for('static', filename='img/Labels_5161.doc')}}" download> Download Label Template </a>
+        <li {% if selectedMenu == "Search" %} class="selected" {% endif %}>
+            <a href="/search">Search</a>
+        </li>
+        <li {% if selectedMenu == "add" %} class="selected" {% endif %}>
+            <a href="/add">Add Seed Stock</a>
+        </li>
+        <li {% if selectedMenu == "Users" %} class="selected" {% endif %}>
+            <a href="/users">Users</a>
+        </li>
+        <li {% if selectedMenu == "Setting" %} class="selected" {% endif %}>
+            <a href="/userSetting" >{{ session['username'] }} - Settings</a>
+        </li>
+        <li {% if selectedMenu == "Home" %} class="selected" {% endif %}>
+            <a href="/logout">Logout</a>
+        </li>
+    {% elif session['role'] == 1 %}
+        <li {% if selectedMenu == "Search" %} class="selected" {% endif %}>
+            <a href="/search">Search</a>
+        </li>
+        <li {% if selectedMenu == "add" %} class="selected" {% endif %}>
+            <a href="/add">Add Seed Stock</a>
+        </li>
+        <li {% if selectedMenu == "Setting" %} class="selected" {% endif %}>
+            <a href="/userSetting" >{{ session['username'] }} - Settings</a>
+        </li>
+        <li {% if selectedMenu == "Home" %} class="selected" {% endif %}>
+            <a href="/logout">Logout</a>
+        </li>
+    {% else %}
+        <li {% if selectedMenu == "Search" %} class="selected" {% endif %}>
+            <a href="/search">Search</a>
+        </li>
+        <li {% if selectedMenu == "Setting" %} class="selected" {% endif %}>
+            <a href="/userSetting" >{{ session['username'] }} - Settings</a>
+        </li>
+        <li {% if selectedMenu == "Home" %} class="selected" {% endif %}>
+            <a href="/logout" >Logout</a>
+        </li>
+    {% endif %}
 {% endblock %}
 
- {%block content %}
- <h1>Modify "{{stockid[0] }}"</h1>
- {% if session['role'] != 2 %}
-<form method="POST" action="/modifyStock">
-<table>
-					<tr><td>Stock ID:</td><td><input readonly type="text" id="stockID" name="stockID" value = "{{ stockid[0] }}" /></td></tr>
-					<tr><td>Cross ID:</td><td><input type="text" id="crossID" name="crossID" value = "{{ stockid[1] }}"/></td></tr>
-					<tr><td>Genotype:</td><td><input type="text" id="genotype" name="genotype" value = "{{ stockid[2] }}"/></td></tr>
-					<tr><td>Generation:</td><td><input type="text" id="generation" name="generation" value = "{{ stockid[3] }}"/></td></tr>
-					<tr><td>Female Parent:</td><td><input type="text" id="femaleParent" name="femaleParent" value = "{{ stockid[4] }}"/></td></tr>
-					<tr><td>Male Parent:</td><td><input type="text" id="maleParent" name="maleParent" value = "{{ stockid[5] }}"/></td></tr>
-					<tr><td>Species:</td><td><input type="text" id="species" name="species" value = "{{ stockid[6] }}"/></td></tr>
-					<!--<tr><td>Month:</td><td><input type="text" id="month" name="month" /></td></tr>-->
-					<tr><td>Date Collected:</td><td><input readonly type="text" id="date" name="date" value = "{{ stockid[7] }}"/></td></tr>
-					<tr><td>Location:</td><td><input type="text" id="location" name="location" value = "{{ stockid[8] }}"/></td></tr>
-					<tr><td>Contributor:</td><td><input type="text" id="contributor" name="contributor" value = "{{ stockid[9] }}"/></td></tr>
-					<tr><td>Antibotic Resistance:</td><td><input type="text" id="antibioticResistance" name="antibioticResistance" value = "{{ stockid[10] }}"/></td></tr>
-					<tr><td>Sequencing Oligo 1:</td><td><input type="text" id="oligo1" name="oligo1" value = "{{ stockid[11] }}"/></td></tr>
-					<tr><td>Sequencing Oligo 2:</td><td><input type="text" id="oligo2" name="oligo2" value = "{{ stockid[12] }}"/></td></tr>
-					<tr><td>Notes:</td><td><input type="text" id="notes" name="notes" value = "{{ stockid[13] }}"/></td></tr>
-					<tr><td>&nbsp;</td><td><input type="submit" value="Modify Stock" /></td></tr>
-					</table>
+{% block sidebar %}
+    <h1>Label Info</h1>
+        S.No {{stockid[0]}} Cross ID: {{stockid[1]}} <br>
+        Generation: {{stockid[3]}} Sibling: <br>
+        Date: {{stockid[7]}} <br>
+        Comments: {{stockid[13]}} <br>
+        <br><br>
+    <a href="{{ url_for('static', filename='img/Labels_5161.doc')}}" download> Download Label Template</a>
+{% endblock %}
 
-    
-
-        
-    </form>
+{%block content %}
+    <h1>Modify "{{stockid[0] }}"</h1>
+    {% if session['role'] != 2 %}
+        <form method="POST" action="/modifyStock">
+           <table>
+              <tr>
+                 <td>Stock ID:</td>
+                 <td><input readonly type="text" id="stockID" name="stockID" value = "{{ stockid[0] }}" /></td>
+              </tr>
+              <tr>
+                 <td>Cross ID:</td>
+                 <td><input type="text" id="crossID" name="crossID" value = "{{ stockid[1] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Genotype:</td>
+                 <td><input type="text" id="genotype" name="genotype" value = "{{ stockid[2] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Generation:</td>
+                 <td><input type="text" id="generation" name="generation" value = "{{ stockid[3] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Female Parent:</td>
+                 <td><input type="text" id="femaleParent" name="femaleParent" value = "{{ stockid[4] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Male Parent:</td>
+                 <td><input type="text" id="maleParent" name="maleParent" value = "{{ stockid[5] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Species:</td>
+                 <td><input type="text" id="species" name="species" value = "{{ stockid[6] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Date Collected:</td>
+                 <td><input readonly type="text" id="date" name="date" value = "{{ stockid[7] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Location:</td>
+                 <td><input type="text" id="location" name="location" value = "{{ stockid[8] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Contributor:</td>
+                 <td><input type="text" id="contributor" name="contributor" value = "{{ stockid[9] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Antibotic Resistance:</td>
+                 <td><input type="text" id="antibioticResistance" name="antibioticResistance" value = "{{ stockid[10] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Sequencing Oligo 1:</td>
+                 <td><input type="text" id="oligo1" name="oligo1" value = "{{ stockid[11] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Sequencing Oligo 2:</td>
+                 <td><input type="text" id="oligo2" name="oligo2" value = "{{ stockid[12] }}"/></td>
+              </tr>
+              <tr>
+                 <td>Notes:</td>
+                 <td><input type="text" id="notes" name="notes" value = "{{ stockid[13] }}"/></td>
+              </tr>
+              <tr>
+                 <td>&nbsp;</td>
+                 <td><input type="submit" value="Modify Stock" /></td>
+              </tr>
+           </table>
+        </form>
     {% else %}
-    </form>
-
-    <form>
-            <table>
-                <tr>
-                    <td>
-                        <label>Stock ID</label>
-                    </td>
-                    <td>
-                        {{ stockid[0] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Cross ID</label>
-                    </td>
-                    <td>
-                        {{ stockid[1] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Genotype</label>
-                    </td>
-                    <td>
-                        {{ stockid[2] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Generation</label>
-                    </td>
-                    <td>
-                        {{ stockid[3] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Female Parent</label>
-                    </td>
-                    <td>
-                        {{ stockid[4] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Male Parent</label>
-                    </td>
-                    <td>
-                        {{ stockid[5] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Species</label>
-                    </td>
-                    <td>
-                        {{ stockid[6] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Date Collected</label>
-                    </td>
-                    <td>
-                        {{ stockid[7] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Location</label>
-                    </td>
-                    <td>
-                        {{ stockid[8] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Contributor</label>
-                    </td>
-                    <td>
-                        {{ stockid[9] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Antibiotics Resistance</label>
-                    </td>
-                    <td>
-                        {{ stockid[10] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Oliga 1</label>
-                    </td>
-                    <td>
-                        {{ stockid[11] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Oliga 2</label>
-                    </td>
-                    <td>
-                        {{ stockid[12] }}
-                    </td>
-                </tr>
-                
-            </table>
-            <div>
-                <h2>Notes</h2>
-                    {{ stockid[13] }}
-            </div>
-    </form>
+        <form>
+           <table>
+              <tr>
+                 <td>
+                    <label>Stock ID</label>
+                 </td>
+                 <td>
+                    {{ stockid[0] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Cross ID</label>
+                 </td>
+                 <td>
+                    {{ stockid[1] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Genotype</label>
+                 </td>
+                 <td>
+                    {{ stockid[2] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Generation</label>
+                 </td>
+                 <td>
+                    {{ stockid[3] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Female Parent</label>
+                 </td>
+                 <td>
+                    {{ stockid[4] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Male Parent</label>
+                 </td>
+                 <td>
+                    {{ stockid[5] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Species</label>
+                 </td>
+                 <td>
+                    {{ stockid[6] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Date Collected</label>
+                 </td>
+                 <td>
+                    {{ stockid[7] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Location</label>
+                 </td>
+                 <td>
+                    {{ stockid[8] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Contributor</label>
+                 </td>
+                 <td>
+                    {{ stockid[9] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Antibiotics Resistance</label>
+                 </td>
+                 <td>
+                    {{ stockid[10] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Oliga 1</label>
+                 </td>
+                 <td>
+                    {{ stockid[11] }}
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>Oliga 2</label>
+                 </td>
+                 <td>
+                    {{ stockid[12] }}
+                 </td>
+              </tr>
+           </table>
+           <div>
+              <h2>Notes</h2>
+              {{ stockid[13] }}
+           </div>
+        </form>
     {%endif %}
- {% endblock %}
+{% endblock %}
