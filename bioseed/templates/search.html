@@ -48,6 +48,23 @@
 {%block content %}
   <h1>Search</h1>
   <form method="POST" action="/searchDB">
+  <select id="searchOptions">
+    <option value="All" selected="selected">All</option>
+    <option value="Stock ID">Stock ID</option>
+    <option value="Cross ID">Cross ID</option>
+    <option value="Genotype">Genotype</option>
+    <option value="Generation">Generation</option>
+    <option value="Female Parent">Female Parent</option>
+    <option value="Male Parent">Male Parent</option>
+    <option value="Date Collected">Date Collected</option>
+    <option value="Location">Location</option>
+    <option value="Contributor ID">Contributor ID</option>
+    <option value="Antibiotic Resistance">Antibiotic Resistance</option>
+    <option value="Oligo 1">Oligo 1</option>
+    <option value="Notes">Notes</option>
+  </select>
+  <p id="searchParams"></p>
+  <button id="clearSearchParams" type="button">Clear</button>
   <p>
     <input class="search" type="text" name="search_field" value="{{displaySearch}}" placeholder="Enter keywords...." onfocus = "if (this.value == 'Enter keywords....') this.value ='';" />
     <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="{{ url_for('static', filename='img/search.png') }}" alt="Search" title="Search" />
