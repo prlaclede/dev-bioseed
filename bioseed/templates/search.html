@@ -50,20 +50,22 @@
   <form method="POST" action="/searchDB">
   <select id="searchOptions">
     <option value="All" selected="selected">All</option>
-    <option value="Stock ID">Stock ID</option>
-    <option value="Cross ID">Cross ID</option>
-    <option value="Genotype">Genotype</option>
-    <option value="Generation">Generation</option>
-    <option value="Female Parent">Female Parent</option>
-    <option value="Male Parent">Male Parent</option>
-    <option value="Date Collected">Date Collected</option>
-    <option value="Location">Location</option>
-    <option value="Contributor ID">Contributor ID</option>
-    <option value="Antibiotic Resistance">Antibiotic Resistance</option>
-    <option value="Oligo 1">Oligo 1</option>
-    <option value="Notes">Notes</option>
+    <option value="stock_id">Stock ID</option>
+    <option value="cross_id">Cross ID</option>
+    <option value="genotype">Genotype</option>
+    <option value="generation">Generation</option>
+    <option value="female_parent">Female Parent</option>
+    <option value="male_parent">Male Parent</option>
+    <option value="species">Species</option>
+    <option value="date_collected">Date Collected</option>
+    <option value="location">Location</option>
+    <option value="contributor_id">Contributor ID</option>
+    <option value="antibiotics_resistance">Antibiotic Resistance</option>
+    <option value="oligo_1">Oligo 1</option>
+    <option value="oligo_2">Oligo 2</option>
+    <option value="notes">Notes</option>
   </select>
-  <p id="searchParams"></p>
+  <textarea readonly="readonly" name="search_params" id="searchParams"></textarea>
   <button id="clearSearchParams" type="button">Clear</button>
   <p>
     <input class="search" type="text" name="search_field" value="{{displaySearch}}" placeholder="Enter keywords...." onfocus = "if (this.value == 'Enter keywords....') this.value ='';" />

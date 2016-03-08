@@ -30,21 +30,26 @@ def searchDB():
   conn = connectToDB()
   cur = conn.cursor()
   displaySearch = request.form['search_field']
-  newSearch =  '%' + displaySearch + '%'
-  defaultSearch = '*'
-
+  searchParamList = request.form['search_params']
+  print "searhParams: " + searchParamList
+  if searchParamList == 'All' or searchParamList == '':
+    searchParamList = """stock_id or cross_id or genotype or generation or 
+    female_parent or male_parent or species or date_collected or location or contributor_id
+    or antibiotics_resistance or oligo_1 or oligo_2"""
+    
+  searchParamList = searchParamList.replace(",", " or") 
+  print searchParamList
+  searchTerm = " "
+  if displaySearch:
+    searchTerm =  '%' + displaySearch + '%'
+  
   query = """SELECT stock_id, cross_id, genotype, generation, female_parent, 
   male_parent, species, date_collected, location, contributor_id, 
   antibiotics_resistance, oligo_1, oligo_2, 
-  notes FROM seed_stock WHERE stock_id OR cross_id LIKE %s"""
-  defaultQuery = "SELECT * from seed_stock;"
-  #print query
-  if newSearch == '%Enter keywords....%':
-    newSearch = "%%"
-    cur.execute(query, newSearch)
-  else:
-    print newSearch
-    cur.execute(query, newSearch)
+  notes FROM seed_stock WHERE {} LIKE %s""".format(searchParamList)
+  print(query)
+  
+  cur.execute(query, searchTerm)
     
   seedstock = cur.fetchall()
 

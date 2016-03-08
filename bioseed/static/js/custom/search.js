@@ -3,7 +3,6 @@ $(function (search, $, undefined) {
     $('body')
             
             .change('#searchOptions', function() {
-                console.log($('#searchOptions').val());
                 var selectedOption = $('#searchOptions').val();
                 if (!$('#searchParams').html().length) {
                     $('#searchParams').append($('#searchOptions').val());
@@ -18,7 +17,6 @@ $(function (search, $, undefined) {
                 $('#searchOptions > option').each(function() {
                     $(this).prop('disabled', false);
                 });
-                
             })
     
 }( window.search = window.search || {}, jQuery ));

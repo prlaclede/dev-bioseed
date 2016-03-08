@@ -25,7 +25,10 @@ customCSS = Bundle('css/custom/*.css')
 
 allJS = Bundle(pluginJS, customJS)
 allCSS = Bundle(customCSS, pluginCSS)
+mainCSS = Bundle('css/plugins/style.css', customCSS)
+loginCSS = Bundle('css/plugins/reset.css', 'css/plugins/loginStyle.css')
 
 assets.register('allJS', allJS)
-assets.register('allCSS', allCSS)
+assets.register('mainCSS', mainCSS)
+assets.register('loginCSS', loginCSS)
 
