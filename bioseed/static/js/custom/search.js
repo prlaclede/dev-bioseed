@@ -2,7 +2,7 @@ $(function (search, $, undefined) {
     
     $('body')
             
-            .change('#searchOptions', function() {
+            .on('change', '#searchOptions', function() {
                 var selectedOption = $('#searchOptions').val();
                 if (!$('#searchParams').html().length) {
                     $('#searchParams').append($('#searchOptions').val());
